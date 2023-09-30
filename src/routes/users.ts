@@ -4,22 +4,14 @@ import { models } from '../db';
 
 const router: Router = Router();
 
-const { Exercise, Program } = models;
+const { Users } = models;
 
 export default () => {
   router.get('/', async (_req: Request, res: Response) => {
-    const exercises = await Exercise.findAll({
-      include: [
-        {
-          model: Program,
-          as: 'program',
-        },
-      ],
-    });
-
+    const programs = await Users.findAll();
     return res.json({
-      data: exercises,
-      message: 'List of exercises',
+      data: programs,
+      message: 'List of programs',
     });
   });
 
