@@ -14,7 +14,7 @@ export interface User {
 
 export interface UserCreationAttributes extends Omit<User, 'id'> {}
 
-@Table({ tableName: 'api_quota_settings', underscored: true })
+@Table({ tableName: 'users', underscored: true })
 export class UserModel extends Model<User, UserCreationAttributes> {
   @Column({ type: DataType.INTEGER, primaryKey: true, autoIncrement: true })
   id: number;
@@ -31,7 +31,7 @@ export class UserModel extends Model<User, UserCreationAttributes> {
   @Column({ type: DataType.STRING, primaryKey: true, allowNull: false })
   email: string;
 
-  @Column({ type: DataType.STRING, primaryKey: true, allowNull: false, values: Object.values(UserRole) })
+  @Column({ type: DataType.STRING, allowNull: false, values: Object.values(UserRole) })
   role: UserRole;
 
   @Column({ type: DataType.STRING, allowNull: false })

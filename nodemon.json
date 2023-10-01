@@ -1,0 +1,16 @@
+{
+  "ignore": [
+    ".git",
+    "node_modules"
+  ],
+  "watch": [
+    "src",
+    ".env"
+  ],
+  "ext": "ts,js,json,yaml,yml",
+  "env": {
+    "NODE_ENV": "development"
+  },
+  "exec": "cross-env TS_NODE_FILES=true TS_NODE_TRANSPILE_ONLY=true node -r ts-node/register -r dotenv/config src/index.ts",
+  "signal": "SIGINT"
+}

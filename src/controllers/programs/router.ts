@@ -1,3 +1,4 @@
 import { Router } from 'express';
+import { ProgramsController } from './controller';
 
-export default Router({ mergeParams: true });
+export const ProgramsRouter = Router({ mergeParams: true }).get('/', ProgramsController.findAll);

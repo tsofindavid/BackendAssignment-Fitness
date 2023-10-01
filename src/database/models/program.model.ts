@@ -8,7 +8,7 @@ export interface Program {
 
 export interface ProgramCreationAttributes extends Omit<Program, 'id'> {}
 
-@Table({ tableName: 'exercise', underscored: true })
+@Table({ tableName: 'programs', underscored: true })
 export class ProgramModel extends Model<Program, ProgramCreationAttributes> {
   @Column({ type: DataType.INTEGER, primaryKey: true, autoIncrement: true })
   id: number;

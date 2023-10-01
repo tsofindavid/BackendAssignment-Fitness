@@ -6,12 +6,12 @@ export interface Exercise {
   id: number;
   name: string;
   difficulty: ExerciseDifficulty;
-  password: string;
+  programId: number;
 }
 
 export interface ExerciseCreationAttributes extends Omit<Exercise, 'id'> {}
 
-@Table({ tableName: 'exercise', underscored: true })
+@Table({ tableName: 'exercises', underscored: true })
 export class ExerciseModel extends Model<Exercise, ExerciseCreationAttributes> {
   @Column({ type: DataType.INTEGER, primaryKey: true, autoIncrement: true })
   id: number;

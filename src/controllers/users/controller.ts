@@ -8,6 +8,6 @@ export default class UsersController {
   }
 
   public static async profile(): Promise<void> {
-    console.log('login');
+    console.log('profile');
   }
 }

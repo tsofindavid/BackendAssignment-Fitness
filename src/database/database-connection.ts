@@ -19,7 +19,7 @@ export class DatabaseConnection {
       port: port,
       password,
       database,
-      logging: AppConfig.nodeEnv === NodeEnv.DEVELOPMENT,
+      logging: AppConfig.nodeEnv === NodeEnv.DEVELOPMENT ? console.log : undefined,
       dialect: 'postgres',
       models: [__dirname + '/models/*.model.{js,ts}'],
       // replace '.' or '-' with an empty string to match file name with model name

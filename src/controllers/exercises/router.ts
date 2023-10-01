@@ -1,3 +1,4 @@
 import { Router } from 'express';
+import { ExercisesController } from './controller';
 
-export default Router({ mergeParams: true });
+export const ExercisesRouter = Router({ mergeParams: true }).get('/', ExercisesController.findAll);
