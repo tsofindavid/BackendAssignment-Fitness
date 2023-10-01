@@ -4,7 +4,7 @@
     "experimentalDecorators": true,
     "target": "es6",
     "module": "commonjs",
-    "declaration": false,
+    "declaration": true,
     "esModuleInterop": true,
     "strict": false,
     "sourceMap": false,
@@ -20,5 +20,6 @@
     "rootDirs": [
       "./src"
     ]
-  }
+  },
+  "files": ["src/types/custom.d.ts"]
 }
