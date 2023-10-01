@@ -1,6 +1,7 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
+    "typeRoots": ["src/types/*.d.ts"],
     "experimentalDecorators": true,
     "target": "es6",
     "module": "commonjs",
@@ -20,6 +21,5 @@
     "rootDirs": [
       "./src"
     ]
-  },
-  "files": ["src/types/custom.d.ts"]
+  }
 }
