@@ -1,4 +1,5 @@
 import { Column, DataType, BelongsTo, Model, Table, ForeignKey } from 'sequelize-typescript';
+import { Optional } from 'sequelize';
 import { ProgramModel } from './program.model';
 import { ExerciseDifficulty } from '../../enums/exercise.enums';
 
@@ -9,7 +10,7 @@ export interface Exercise {
   programId: number;
 }
 
-export interface ExerciseCreationAttributes extends Omit<Exercise, 'id'> {}
+export interface ExerciseCreationAttributes extends Optional<Exercise, 'id'> {}
 
 @Table({ tableName: 'exercises', underscored: true })
 export class ExerciseModel extends Model<Exercise, ExerciseCreationAttributes> {
@@ -19,7 +20,7 @@ export class ExerciseModel extends Model<Exercise, ExerciseCreationAttributes> {
   @Column({ type: DataType.STRING, allowNull: false })
   name: string;
 
-  @Column({ type: DataType.STRING, allowNull: false, values: Object.values(ExerciseDifficulty) })
+  @Column({ type: DataType.STRING, allowNull: false, values: ['EASY', 'MEDIUM', 'HARD'] })
   difficulty: ExerciseDifficulty;
 
   @ForeignKey(() => ProgramModel)

@@ -3,6 +3,7 @@ import { UserRouter } from './controllers/users/router';
 import { ProgramsRouter } from './controllers/programs/router';
 import { ExercisesRouter } from './controllers/exercises/router';
 
-export = {
-  routerV1: Router().use('/users', UserRouter).use('/programs', ProgramsRouter).use('/exercises', ExercisesRouter),
-};
+export const routerV1 = Router()
+  .use('/users', UserRouter)
+  .use('/programs', ProgramsRouter)
+  .use('/exercises', ExercisesRouter);

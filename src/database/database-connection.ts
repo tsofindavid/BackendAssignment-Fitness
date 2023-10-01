@@ -1,7 +1,7 @@
 import { Sequelize } from 'sequelize-typescript';
-import AppConfig from '../configs/app.config';
+import { AppConfig } from '../configs/app.config';
 import { NodeEnv } from '../enums/app.enum';
-import DatabaseConfig from '../configs/database.config';
+import { DatabaseConfig } from '../configs/database.config';
 
 export class DatabaseConnection {
   private static _connection: Sequelize;

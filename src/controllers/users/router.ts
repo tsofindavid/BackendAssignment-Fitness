@@ -1,8 +1,9 @@
 import { Router } from 'express';
 import { AuthMiddleware } from '../../middlewares/auth.middleware';
-import UsersController from '../users/controller';
+import { UsersController } from './controller';
+import { HandlerWrapper } from '../../middlewares/error-hanndler.middleware';
 
 export const UserRouter = Router({ mergeParams: true })
-  .get('/login', UsersController.login)
-  .get('/profile', AuthMiddleware, UsersController.profile)
-  .post('/register', UsersController.register);
+  .get('/profile', AuthMiddleware, HandlerWrapper(UsersController.profile))
+  .post('/login', HandlerWrapper(UsersController.login))
+  .post('/register', HandlerWrapper(UsersController.register));

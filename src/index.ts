@@ -1,7 +1,6 @@
 import express, { json, RequestHandler, urlencoded } from 'express';
-import http from 'http';
-import Routes from './routes';
-import AppConfig from './configs/app.config';
+import { routerV1 } from './routes';
+import { AppConfig } from './configs/app.config';
 import { DatabaseConnection } from './database/database-connection';
 
 class App {
@@ -13,11 +12,9 @@ class App {
     app.use(urlencoded({ extended: true }) as RequestHandler);
     app.use(json() as RequestHandler);
 
-    app.use('/api/v1', Routes.routerV1);
+    app.use('/api/v1', routerV1);
 
-    const httpServer = http.createServer(app);
-
-    httpServer.listen(AppConfig.port).on('listening', () => console.log(`Server started at port ${AppConfig.port}`));
+    app.listen(AppConfig.port).on('listening', () => console.log(`Server started at port ${AppConfig.port}`));
   }
 }
 

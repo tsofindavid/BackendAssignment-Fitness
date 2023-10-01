@@ -1,4 +1,5 @@
 import { Column, DataType, Model, Table } from 'sequelize-typescript';
+import { Optional } from 'sequelize';
 import { UserRole } from '../../enums/user.enums';
 
 export interface User {
@@ -6,13 +7,13 @@ export interface User {
   role: UserRole;
   name: string;
   surname: string;
-  nickName: string;
+  nickname: string;
   email: string;
   age: number;
   password: string;
 }
 
-export interface UserCreationAttributes extends Omit<User, 'id'> {}
+export interface UserCreationAttributes extends Optional<User, 'id'> {}
 
 @Table({ tableName: 'users', underscored: true })
 export class UserModel extends Model<User, UserCreationAttributes> {
@@ -23,15 +24,15 @@ export class UserModel extends Model<User, UserCreationAttributes> {
   name: string;
 
   @Column({ type: DataType.STRING, allowNull: false })
-  sureName: string;
+  surname: string;
 
   @Column({ type: DataType.STRING, primaryKey: true, allowNull: false })
-  nickName: string;
+  nickname: string;
 
   @Column({ type: DataType.STRING, primaryKey: true, allowNull: false })
   email: string;
 
-  @Column({ type: DataType.STRING, allowNull: false, values: Object.values(UserRole) })
+  @Column({ type: DataType.STRING, allowNull: false, values: ['ADMIN', 'USER'] })
   role: UserRole;
 
   @Column({ type: DataType.STRING, allowNull: false })
