@@ -1,5 +1,5 @@
-import { HasMany, Column, DataType, ForeignKey, Model, Table } from 'sequelize-typescript';
-import { Exercise, ExerciseModel } from './exercise.model';
+import { HasMany, Column, DataType, Model, Table } from 'sequelize-typescript';
+import { ExerciseModel } from './exercise.model';
 import { Optional } from 'sequelize';
 
 export interface Program {
@@ -8,6 +8,7 @@ export interface Program {
 }
 
 export interface ProgramCreationAttributes extends Optional<Program, 'id'> {}
+export interface ProgramUpdatationAttributes extends Optional<Program, 'id'> {}
 
 @Table({ tableName: 'programs', underscored: true })
 export class ProgramModel extends Model<Program, ProgramCreationAttributes> {

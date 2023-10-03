@@ -1,4 +1,3 @@
-import { Request } from 'express';
 import { Strategy, ExtractJwt, StrategyOptions, VerifiedCallback } from 'passport-jwt';
 import passport from 'passport';
 import { JwtConfig } from '../configs/jwt.config';
@@ -21,12 +20,12 @@ const strategy = new Strategy(options, async (jwt_payload: { id: string }, done:
   });
 
   if (!user) {
-    throw new Error('User not found');
+    done(null, false);
+  } else {
+    const { id, email, nickname, role } = user;
+
+    done(false, { id, email, nickname, role });
   }
-
-  const { id, email, nickname, role } = user;
-
-  done(false, { id, email, nickname, role });
 });
 
 export const AuthMiddleware = passport.authenticate(strategy, { session: false });

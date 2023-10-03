@@ -14,6 +14,7 @@ export interface User {
 }
 
 export interface UserCreationAttributes extends Optional<User, 'id'> {}
+export interface UserUpdateAttributes extends Optional<User, 'id'> {}
 
 @Table({ tableName: 'users', underscored: true })
 export class UserModel extends Model<User, UserCreationAttributes> {
@@ -32,7 +33,7 @@ export class UserModel extends Model<User, UserCreationAttributes> {
   @Column({ type: DataType.STRING, primaryKey: true, allowNull: false })
   email: string;
 
-  @Column({ type: DataType.STRING, allowNull: false, values: ['ADMIN', 'USER'] })
+  @Column({ type: DataType.ENUM({ values: Object.values(UserRole as Record<string, string>) }), allowNull: false })
   role: UserRole;
 
   @Column({ type: DataType.STRING, allowNull: false })

@@ -1,7 +1,12 @@
+import { UserRole } from '../enums/user.enums';
+
 declare global {
   namespace Express {
-    export interface Request {
-      user?: { id: string };
+    interface User {
+      id?: number;
+      role?: UserRole;
+      nickname?: string;
+      email?: string;
     }
   }
 }

@@ -1,9 +1,14 @@
 import { Router } from 'express';
 import { AuthMiddleware } from '../../middlewares/auth.middleware';
 import { UsersController } from './controller';
-import { HandlerWrapper } from '../../middlewares/error-hanndler.middleware';
+import { ErrorHanndler } from '../../middlewares/error-hanndler.middleware';
 
 export const UserRouter = Router({ mergeParams: true })
-  .get('/profile', AuthMiddleware, HandlerWrapper(UsersController.profile))
-  .post('/login', HandlerWrapper(UsersController.login))
-  .post('/register', HandlerWrapper(UsersController.register));
+  .post('/login', ErrorHanndler(UsersController.login))
+  .post('/register', ErrorHanndler(UsersController.register))
+  .use(AuthMiddleware)
+  .get('/', ErrorHanndler(UsersController.findMe))
+  .get('/id/:id', ErrorHanndler(UsersController.findById))
+  .get('/all', ErrorHanndler(UsersController.findAll))
+  .patch('/', ErrorHanndler(UsersController.updateUser))
+  .patch('/id/:id', ErrorHanndler(UsersController.updateUserById));
