@@ -1,7 +1,7 @@
 import {
   ExerciseCreationAttributes,
   ExerciseModel,
-  ExerciseUpdationAttributes,
+  ExerciseUpdateAttributes,
 } from '../../database/models/exercise.model';
 import { NotFoundError } from '../../errors/http.errors';
 import UserExerciseModel from '../../database/models/user-execise.model';
@@ -96,7 +96,7 @@ export class ExercisesService {
     return { id };
   }
 
-  public static async update(id: number, exercise: ExerciseUpdationAttributes): Promise<void> {
+  public static async update(id: number, exercise: ExerciseUpdateAttributes): Promise<void> {
     await ExerciseModel.update(exercise, { returning: false, where: { id } });
   }
 

@@ -11,7 +11,7 @@ export interface Exercise {
 }
 
 export interface ExerciseCreationAttributes extends Optional<Exercise, 'id'> {}
-export interface ExerciseUpdationAttributes extends Optional<Exercise, 'id'> {}
+export interface ExerciseUpdateAttributes extends Optional<Exercise, 'id'> {}
 
 @Table({ tableName: 'exercises', underscored: true })
 export class ExerciseModel extends Model<Exercise, ExerciseCreationAttributes> {

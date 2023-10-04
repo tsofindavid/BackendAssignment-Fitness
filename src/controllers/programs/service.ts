@@ -1,4 +1,4 @@
-import { ProgramModel, ProgramUpdatationAttributes } from '../../database/models/program.model';
+import { ProgramModel, ProgramCreationAttributes, ProgramUpdateAttributes } from '../../database/models/program.model';
 import { NotFoundError } from '../../errors/http.errors';
 import { DatabaseUtils } from '../../utils/database.util';
 
@@ -21,13 +21,13 @@ export class ProgramsService {
     return result;
   }
 
-  public static async create(program: ProgramUpdatationAttributes): Promise<{ id: number }> {
+  public static async create(program: ProgramCreationAttributes): Promise<{ id: number }> {
     const { id } = await ProgramModel.create(program);
 
     return { id };
   }
 
-  public static async update(id: number, program: ProgramUpdatationAttributes): Promise<ProgramModel> {
+  public static async update(id: number, program: ProgramUpdateAttributes): Promise<ProgramModel> {
     await ProgramModel.update(program, { where: { id }, returning: false });
   }
 

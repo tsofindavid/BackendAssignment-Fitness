@@ -8,7 +8,7 @@ export interface Program {
 }
 
 export interface ProgramCreationAttributes extends Optional<Program, 'id'> {}
-export interface ProgramUpdatationAttributes extends Optional<Program, 'id'> {}
+export interface ProgramUpdateAttributes extends Optional<Program, 'id'> {}
 
 @Table({ tableName: 'programs', underscored: true })
 export class ProgramModel extends Model<Program, ProgramCreationAttributes> {

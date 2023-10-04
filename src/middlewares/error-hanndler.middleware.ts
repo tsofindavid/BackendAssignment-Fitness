@@ -1,6 +1,6 @@
 import { RequestHandler } from 'express';
 
-export const ErrorHanndler = (handler: RequestHandler): RequestHandler => {
+export const ErrorHandler = (handler: RequestHandler): RequestHandler => {
   return async (req, res, next) => {
     try {
       const result: unknown | Promise<unknown> = handler(req, res, next);

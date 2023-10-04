@@ -1,4 +1,4 @@
-import { Column, DataType, Model, Table, PrimaryKey } from 'sequelize-typescript';
+import { Column, DataType, Model, Table } from 'sequelize-typescript';
 import { Optional } from 'sequelize';
 import { UserRole } from '../../enums/user.enums';
 

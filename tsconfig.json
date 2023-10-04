@@ -3,7 +3,7 @@
   "compilerOptions": {
     "typeRoots": ["src/types/*.d.ts"],
     "experimentalDecorators": true,
-    "target": "es6",
+    "target": "es2016",
     "module": "commonjs",
     "declaration": true,
     "esModuleInterop": true,
