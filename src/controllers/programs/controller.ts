@@ -3,14 +3,14 @@ import { Request, Response } from 'express';
 import { UserRole } from '../../enums/user.enums';
 import { PermissionDeniedError } from '../../errors/http.errors';
 import { ProgramCreationAttributes, ProgramUpdatationAttributes } from '../../database/models/program.model';
-import { Filter } from '../../types/filter.types';
 
 export class ProgramsController {
-  public static async findAll(req: Request<never, never, never, Filter>, res: Response): Promise<void> {
-    const page: number = +req.query.page || 1;
-    const limit: number = +req.query.limit || 20;
+  public static async findAll(req: Request<never, never, never>, res: Response): Promise<void> {
+    const page: number = req.query.page ? +req.query.page : 1;
+    const limit: number = req.query.limit ? +req.query.limit : 20;
+    const search: string | undefined = req.query.search ? (req.query.search as string) : undefined;
 
-    const data = await ProgramsService.findAll({ page, limit }, req.query?.search);
+    const data = await ProgramsService.findAll({ page, limit }, search);
 
     res.json({
       data,
