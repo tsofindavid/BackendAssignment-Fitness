@@ -1,24 +1,25 @@
-import http from 'http'
-import express from 'express'
-import * as bodyParser from 'body-parser'
+import express, { json, RequestHandler, urlencoded } from 'express';
+import { routerV1 } from './routes';
+import { AppConfig } from './configs/app.config';
+import { DatabaseConnection } from './database/database-connection';
+import { LoggerMiddleware } from './middlewares/logger.middleware';
 
-import { sequelize } from './db'
-import ProgramRouter from './routes/programs'
-import ExerciseRouter from './routes/exercises'
+class App {
+  public static async init(): Promise<void> {
+    await DatabaseConnection.init();
 
-const app = express()
+    const app = express();
 
-app.use(bodyParser.urlencoded({ extended: true }))
-app.use(bodyParser.json())
-app.use('/programs', ProgramRouter())
-app.use('/exercises', ExerciseRouter())
+    app.use(urlencoded({ extended: true }) as RequestHandler);
+    app.use(json() as RequestHandler);
+    app.use(LoggerMiddleware);
 
-const httpServer = http.createServer(app)
+    app.use('/api/v1', routerV1);
 
-sequelize.sync()
+    app.listen(AppConfig.port).on('listening', () => console.log(`Server started at port ${AppConfig.port}`));
+  }
+}
 
-console.log('Sync database', 'postgresql://localhost:5432/fitness_app')
-
-httpServer.listen(8000).on('listening', () => console.log(`Server started at port ${8000}`))
-
-export default httpServer
+App.init().catch(({ message }) => {
+  console.error(`Start App Error: ${message}`);
+});

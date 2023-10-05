@@ -1,0 +1,31 @@
+module.exports = {
+    root: true,
+    env: {
+        node: true,
+    },
+    parser: '@typescript-eslint/parser',
+    parserOptions: {
+        ecmaVersion: 2020,
+        project: `${__dirname}/tsconfig.json`,
+    },
+    plugins: ['prettier'],
+    extends: ['airbnb-typescript', 'plugin:prettier/recommended'],
+    rules: {
+        'prettier/prettier': ['error', { endOfLine: 'auto' }],
+        '@typescript-eslint/lines-between-class-members': ['error', 'always', { exceptAfterSingleLine: true }],
+        'no-await-in-loop': 'off',
+        'no-restricted-syntax': 'off',
+        'no-continue': 'off',
+        'import/extensions': 'off',
+        'class-methods-use-this': 'off',
+        'no-case-declarations': 'off',
+        'no-eval': 'off',
+        'import/prefer-default-export': 'off',
+        'import/no-extraneous-dependencies': 'off',
+        'no-param-reassign': 'off',
+        'no-empty': ['error', { allowEmptyCatch: true }],
+        'no-console': ['error'],
+        'react/jsx-filename-extension': 'off',
+        'no-underscore-dangle': 'off',
+    },
+};

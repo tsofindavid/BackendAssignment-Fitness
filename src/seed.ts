@@ -1,53 +1,68 @@
-import { models, sequelize } from './db/index'
-import { EXERCISE_DIFFICULTY } from './utils/enums'
-
-const {
-	Exercise,
-	Program,
-} = models
+import { DatabaseConnection } from './database/database-connection';
+import { ProgramModel } from './database/models/program.model';
+import { ExerciseModel } from './database/models/exercise.model';
+import { ExerciseDifficulty } from './enums/exercise.enums';
 
 const seedDB = async () => {
-	await sequelize.sync({ force: true })
+  await DatabaseConnection.init();
 
-	await Program.bulkCreate([{
-		name: 'Program 1'
-	}, {
-		name: 'Program 2'
-	}, {
-		name: 'Program 3'
-	}] as any[], { returning: true })
+  await DatabaseConnection.connection.sync({ force: true });
 
-	await Exercise.bulkCreate([{
-		name: 'Exercise 1',
-		difficulty: EXERCISE_DIFFICULTY.EASY,
-		programID: 1
-	}, {
-		name: 'Exercise 2',
-		difficulty: EXERCISE_DIFFICULTY.EASY,
-		programID: 2
-	}, {
-		name: 'Exercise 3',
-		difficulty: EXERCISE_DIFFICULTY.MEDIUM,
-		programID: 1
-	}, {
-		name: 'Exercise 4',
-		difficulty: EXERCISE_DIFFICULTY.MEDIUM,
-		programID: 2
-	}, {
-		name: 'Exercise 5',
-		difficulty: EXERCISE_DIFFICULTY.HARD,
-		programID: 1
-	}, {
-		name: 'Exercise 6',
-		difficulty: EXERCISE_DIFFICULTY.HARD,
-		programID: 2
-	}])
-}
+  const programs = await ProgramModel.bulkCreate(
+    [
+      {
+        name: 'Program 1',
+      },
+      {
+        name: 'Program 2',
+      },
+      {
+        name: 'Program 3',
+      },
+    ] as any[],
+    { returning: true }
+  );
 
-seedDB().then(() => {
-	console.log('DB seed done')
-	process.exit(0)
-}).catch((err) => {
-	console.error('error in seed, check your data and model \n \n', err)
-	process.exit(1)
-})
+  await ExerciseModel.bulkCreate([
+    {
+      name: 'Exercise 1',
+      difficulty: ExerciseDifficulty.EASY,
+      programId: programs[0].id,
+    },
+    {
+      name: 'Exercise 2',
+      difficulty: ExerciseDifficulty.EASY,
+      programId: programs[1].id,
+    },
+    {
+      name: 'Exercise 3',
+      difficulty: ExerciseDifficulty.MEDIUM,
+      programId: programs[0].id,
+    },
+    {
+      name: 'Exercise 4',
+      difficulty: ExerciseDifficulty.MEDIUM,
+      programId: programs[0].id,
+    },
+    {
+      name: 'Exercise 5',
+      difficulty: ExerciseDifficulty.HARD,
+      programId: programs[0].id,
+    },
+    {
+      name: 'Exercise 6',
+      difficulty: ExerciseDifficulty.HARD,
+      programId: programs[1].id,
+    },
+  ]);
+};
+
+seedDB()
+  .then(() => {
+    console.log('DB seed done');
+    process.exit(0);
+  })
+  .catch(err => {
+    console.error('error in seed, check your data and model \n \n', err);
+    process.exit(1);
+  });

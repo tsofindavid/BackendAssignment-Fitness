@@ -1,21 +1,25 @@
 {
-    "compilerOptions": {
-		"esModuleInterop": true,
-        "target": "es6",
-        "module": "commonjs",
-    	"outDir": "./dist",
-		"sourceMap": true,
-        "noImplicitAny": true,
-		"typeRoots" : [
-            "node_modules/@types",
-			"./src/types"
-		],
-		"resolveJsonModule": true
-    },
-    "include": [
-		"./src/**/*"
-	],
-	"exclude": [
-        "node_modules"
+  "compileOnSave": false,
+  "compilerOptions": {
+    "typeRoots": ["src/types/*.d.ts"],
+    "experimentalDecorators": true,
+    "target": "es2016",
+    "module": "commonjs",
+    "declaration": true,
+    "esModuleInterop": true,
+    "strict": false,
+    "sourceMap": false,
+    "moduleResolution": "node",
+    "outDir": "./dist",
+    "resolveJsonModule": true,
+    "lib": [
+      "es2020",
+      "DOM",
+      "ESNext.String"
+    ],
+    "baseUrl": ".",
+    "rootDirs": [
+      "./src"
     ]
+  }
 }
